@@ -3,7 +3,7 @@ import { promisify } from 'util'
 export const client = createClient({
     port: +process.env.R_PORT || 6379,
     host: process.env.R_HOST || "localhost",
-    //password: process.env.R_PASSWORD
+    password: process.env.R_PASSWORD
 })
 
 client.on('connect', () => {
