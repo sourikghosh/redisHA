@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-client-redisha
+  labels:
+    app: client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: simple-client-redisha
+        image: sourikg/simple-client-redisha
+        env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: simple-client-redisha-config
+                  key: port
+            - name: R_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: simple-client-redisha-secret
+                  key: redis_port
+            - name: R_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: simple-client-redisha-secret
+                  key: redis_password
+            - name: R_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: simple-client-redisha-secret
+                  key: redis_host
