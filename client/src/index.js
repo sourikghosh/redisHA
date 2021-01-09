@@ -1,23 +1,19 @@
 import express from 'express'
-import { client, setAsync, getAsync } from './db.js'
+import { setAsync, getAsync } from './db.js'
 const app = express()
 
-app.get('/', (req, res, next) => {
-    let currentCounter = updateCounter()
-    res.send({ counter: currentCounter })
+app.get('/', async (req, res, next) => {
+    try {
+        await setAsync("ed", "shot")
+        const result = await getAsync("ed")
+        console.log(result)
+        res.send({ ed: result })
+    }
+    catch (err) {
+        res.send(err)
+    }
 })
 
-const updateCounter = async () => {
-    try {
-        const result = getAsync("counter")
-        if (!result.data)
-            await setAsync("counter", 0)
-        else
-            await setAsync("counter", result.data + 1)
-    } catch (error) {
-
-    }
-}
 
 const PORT = process.env.PORT || 3000
 
