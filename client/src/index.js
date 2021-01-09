@@ -1,5 +1,5 @@
 import express from 'express'
-import { setAsync, getAsync } from './db'
+import { client, setAsync, getAsync } from './db.js'
 const app = express()
 
 app.get('/', (req, res, next) => {
