@@ -13,6 +13,11 @@ kubectl -n redis logs redis-0
 kubectl -n redis logs redis-1
 kubectl -n redis logs redis-2
 
+kubectl -n redis exec -it redis-0 sh
+redis-cli 
+auth a-very-complex-password-here
+info replication
+
 kubectl -n redis get pods -o wide
 kubectl -n redis get pv
 kubectl -n redis logs sentinel-0
