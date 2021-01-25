@@ -11,12 +11,15 @@ Then we pass the secrets like Database config, password etc.You might be thinkin
 ```bash 
 kubectl apply -n client -f ./secret.yml
 ```
+Create the deployment
 ```bash 
 kubectl apply -n client -f ./deployment.yml
 ```
+Creating service with type loadbalancer to access the cluster outside the node.Please dont use this aproach use ingress-controller for the entry point for the cluster.
 ```bash 
 kubectl apply -n client -f ./service.yml
 ```
+Creating simple /GET request to access the cluster outside the node running on localhost (127.0.0.1) on default port 80
 ```bash 
 curl localhost
 ```
