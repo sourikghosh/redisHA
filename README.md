@@ -1,4 +1,4 @@
-# REDIS HIGH AVAILIBILY AND REPLICATION
+# REDIS HIGH AVAILABILITY AND REPLICATION
 
 This project mainly focuses on achieving HA and Replication on Kubernetes platform. I tried to follow all the necessary best practices unless and until it makes our workflow more complicated. Since our primary goal is to achieve HA.
 
