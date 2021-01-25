@@ -7,7 +7,7 @@ Then we create the configMap for the deployment where we set the port configurat
 ```bash 
 kubectl apply -n client -f ./configmap.yml
 ```
-
+Then we pass the secrets like Database config, password etc.You might be thinking why we are not using Db_secrets in more secure way like vaults, My answer to that question is just to reduce complexity in our aritechture. Please use a more secure and robust approach while handling your secrets like *hasiCorp Vault* in production. 
 ```bash 
 kubectl apply -n client -f ./secret.yml
 ```
