@@ -30,6 +30,8 @@ Use ` replicaof ` to make a Redis instance a copy of another Redis server. A few
 - One of the Solution is using initContainers to make the connection between replicas and master on the fly.Initcontainer spawns before the pod creation and makes the master-replica connection.
 - Redis solution to this is Redis Sentinels.Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention certain kinds of failures.
 
+To check all the Kubernetes command used [kubernetes-command](https://github.com/sourikghosh/redisHA/blob/main/kubernetes-command.md)
+
 ### Redis Persistence
 Redis is a database though it's in-memory but we are enabling persistence in it by both append-only mode and rdb mode as well both the mode have its drawback.
 
