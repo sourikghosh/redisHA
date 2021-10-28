@@ -25,16 +25,16 @@ Use ` replicaof ` to make a Redis instance a copy of another Redis server. A few
 - How to deciede which will be the next **master** if the **master** dies.
 
 ## Expected Solutions
-- We have to use Statefulset a StatefulSet manages Pods that are based on an identical container spec. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of their Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
-- We have to use headless service.Headless Services, a cluster IP is not allocated, kube-proxy does not handle these Services, and there is no load balancing or proxying done by the platform for them.For headless Services that define selectors, the endpoints controller creates Endpoints records in the API, and modifies the DNS configuration to return records (addresses) that point directly to the Pods backing the Servic.
-- One of the Solution is using initContainers to make the connection between replicas and master on the fly.Initcontainer spawns before the pod creation and makes the master-replica connection.
-- Redis solution to this is Redis Sentinels.Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention certain kinds of failures.
+- We have to use Statefulset. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of their Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
+- We have to use headless service. Kube-proxy does not handle these Services, and there is no load balancing or proxying done by the platform for them.For headless Services that define selectors, the endpoints controller creates Endpoints records in the API, and modifies the DNS configuration to return records (addresses) that point directly to the Pods backing the Servic.
+- One of the Solution is using initContainers to make the connection between replicas and master on the fly. Initcontainer spawns before the pod creation and makes the master-replica connection.
+- Redis solution to this is Redis Sentinels. Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention certain kinds of failures.
 
 To check all the Kubernetes command used [kubernetes-command](https://github.com/sourikghosh/redisHA/blob/main/kubernetes-command.md)
 
 ### Redis Persistence
 Redis is a database though it's in-memory but we are enabling persistence in it by both append-only mode and rdb mode as well both the mode have its drawback.
 
-##### RDB mode
+<!-- ##### RDB mode
 This makes the format more resistant to corruption but there is a performance hit to pay (around 10%) when saving and loading RDB files, so you can disable it.
-If you want to save some CPU in the saving child set it to 'no' but the dataset will likely be bigger if you have compressible values or keys.
+If you want to save some CPU in the saving child set it to 'no' but the dataset will likely be bigger if you have compressible values or keys. -->
